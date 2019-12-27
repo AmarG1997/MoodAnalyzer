@@ -4,7 +4,14 @@ import com.bridgelabz.exception.MoodCustomException;
 
 public class MoodAnalyser
 {
+    private String message;
 
+    public MoodAnalyser(String message) {
+        this.message = message;
+    }
+    public MoodAnalyser(){
+
+    }
     public String analyze(String message) throws MoodCustomException {
         try {
             if (message.length()==0) {
