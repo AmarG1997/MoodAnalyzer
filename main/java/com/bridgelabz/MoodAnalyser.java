@@ -2,6 +2,8 @@ package com.bridgelabz;
 
 import com.bridgelabz.exception.MoodCustomException;
 
+import java.util.Objects;
+
 public class MoodAnalyser
 {
     private String message;
@@ -12,7 +14,21 @@ public class MoodAnalyser
     public MoodAnalyser(){
 
     }
-    public String analyze(String message) throws MoodCustomException {
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MoodAnalyser)) return false;
+        MoodAnalyser that = (MoodAnalyser) o;
+        return Objects.equals(message, that.message);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(message);
+    }
+
+    public String analyze() throws MoodCustomException {
         try {
             if (message.length()==0) {
                 throw new MoodCustomException(MoodCustomException.ExceptionType.ENTERED_EMPTY, "Enter valid message");
