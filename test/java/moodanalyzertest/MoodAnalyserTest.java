@@ -62,10 +62,10 @@ public class MoodAnalyserTest
                 {
                     String mood = moodAnalyser.analyze();
                     Assert.assertEquals("Happy",mood);
-            }catch (MoodCustomException e)
-            {
+                }catch (MoodCustomException e)
+                {
                 e.printStackTrace();
-            }
+                }
 
         } catch (InstantiationException e) {
             e.printStackTrace();
@@ -93,5 +93,23 @@ public class MoodAnalyserTest
         MoodAnalyser moodAnalyser = new MoodAnalyser("I am Happy");
         MoodAnalyser moodAnalyser1 = MoodAnalyzerFactory.createMoodAnalyzer("I am Happy");
         Assert.assertEquals(true,moodAnalyser1.equals(moodAnalyser));
+    }
+
+    @Test
+    public void whenImproperClassName_shouldReturnException() {
+        try {
+            Constructor <?> constructor=Class.forName("com.bridgelabz.MoodAnalyse").getConstructor(String.class);
+
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+            throw  new MoodCustomException(MoodCustomException.ExceptionType.No_SUCH_METHOD_FOUND,"Enter Valid message");
+        } catch (ClassNotFoundException e) {
+            try {
+                throw new MoodCustomException(MoodCustomException.ExceptionType.No_SUCH_CLASS_FOUND, "Enter Valid message");
+            }
+            catch (MoodCustomException a) {
+                a.printStackTrace();
+            }
+        }
     }
 }

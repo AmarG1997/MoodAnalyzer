@@ -4,7 +4,9 @@ public class MoodCustomException extends RuntimeException{
 
     public enum ExceptionType
     {
-        ENTERED_NULL,ENTERED_EMPTY
+        ENTERED_NULL,ENTERED_EMPTY,No_SUCH_METHOD_FOUND,No_SUCH_CLASS_FOUND,;
+
+
     }
     ExceptionType type;
 
