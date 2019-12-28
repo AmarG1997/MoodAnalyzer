@@ -112,4 +112,21 @@ public class MoodAnalyserTest
             }
         }
     }
+
+    @Test
+    public void whenImproperMethodName_shouldReturnException() {
+        try {
+            Constructor<?>constructor=Class.forName("com.bridgelabz.MoodAnalyser").getConstructor();
+        } catch (NoSuchMethodException e) {
+
+            try {
+                throw new MoodCustomException(MoodCustomException.ExceptionType.No_SUCH_METHOD_FOUND, "Enter Valid Method name");
+            }catch (Exception aa)
+            {
+                aa.printStackTrace();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }
