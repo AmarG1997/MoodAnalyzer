@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class MoodAnalyserTest
 {
@@ -144,5 +145,24 @@ public class MoodAnalyserTest
         Object object = MoodAnalyzerFactory.getObject(constructor);
         MoodAnalyser moodAnalyser = (MoodAnalyser)object;
         Assert.assertEquals(true,moodAnalyser.equals(new MoodAnalyser()));
+    }
+
+    @Test
+    public void whenInvokeMethod_shouldCorrect() {
+        MoodAnalyser moodAnalyser = new MoodAnalyser("I am sad");
+        Class cls = moodAnalyser.getClass();
+        try {
+            Method method = cls.getMethod("analyze");
+            Object object =method.invoke(moodAnalyser);
+            Assert.assertEquals("Sad",object.toString());
+
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
     }
 }
