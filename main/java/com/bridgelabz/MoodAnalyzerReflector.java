@@ -1,5 +1,7 @@
 package com.bridgelabz;
 
+import com.bridgelabz.exception.MoodCustomException;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -64,8 +66,20 @@ public class MoodAnalyzerReflector {
     public static Method getMethod(String message) throws NoSuchMethodException {
     Constructor<?> constructor =getConstructor(String.class);
     Object object = getObject(constructor,message);
-        Method analyze = object.getClass().getDeclaredMethod("analyze");
-        return analyze;
+    Method analyze = object.getClass().getDeclaredMethod("analyze");
+    return analyze;
 }
 
+    public static Method getIncorrectMethod(String methodName) {
+
+        try {
+            Constructor<?> constructor = getConstructor(String.class);
+            Object object = getObject(constructor,"sad");
+            Method analyzer = object.getClass().getDeclaredMethod(methodName);
+            return analyzer;
+
+        } catch (NoSuchMethodException e) {
+            throw new MoodCustomException(MoodCustomException.ExceptionType.No_SUCH_METHOD_FOUND,"Enter Valid Method Name");
+        }
+    }
 }

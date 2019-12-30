@@ -173,4 +173,18 @@ public class MoodAnalyserTest
         Assert.assertEquals("Happy",mood);
     }
 
+
+    @Test
+    public void whenGivenMethodNameNotProper_shouldInvokeReturnObject() throws InvocationTargetException, IllegalAccessException {
+        try {
+            Method method = MoodAnalyzerReflector.getIncorrectMethod("analys");
+            String mood = (String) method.invoke(new MoodAnalyser("i am happy"));
+            Assert.assertEquals("Happy", mood);
+        }
+        catch (MoodCustomException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }
