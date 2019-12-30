@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -187,4 +188,21 @@ public class MoodAnalyserTest
 
     }
 
+    @Test
+    public void whenGivenFieldNameNotProper_ifnotValid_shouldReturnMessage() {
+        try {
+            Class<?> cls= Class.forName("com.bridgelabz.MoodAnalyser");
+            Field field = cls.getField("msg");
+            Assert.assertEquals(field,"msg");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            try {
+                throw new MoodCustomException(MoodCustomException.ExceptionType.NO_SUCH_FIELD_FOUND, "Enter Valid Field Name");
+            }catch (MoodCustomException ex)
+            {
+                ex.printStackTrace();
+            }
+        }
+    }
 }
