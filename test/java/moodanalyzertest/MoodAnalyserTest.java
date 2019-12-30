@@ -205,4 +205,21 @@ public class MoodAnalyserTest
             }
         }
     }
+
+    @Test
+    public void whenGivenNullMessage_shouldReturnException() throws IllegalAccessException {
+        try {
+            Method method = MoodAnalyzerReflector.getMethod("analyse");
+            String mood = (String) method.invoke(new MoodAnalyser(null));
+            Assert.assertEquals("Happy", mood);
+        }catch (InvocationTargetException e) {
+            try {
+                throw new MoodCustomException(MoodCustomException.ExceptionType.ENTERED_NULL, "Please enter the valid message");
+            }catch (MoodCustomException ee){
+                ee.printStackTrace();
+            }
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+    }
 }
