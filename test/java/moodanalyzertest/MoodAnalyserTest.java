@@ -117,7 +117,7 @@ public class MoodAnalyserTest
     public void whenImproperMethodName_shouldReturnException() {
         try {
             Constructor<?>constructor=Class.forName("com.bridgelabz.MoodAnalyser").getConstructor();
-        } catch (NoSuchMethodException e) {
+            } catch (NoSuchMethodException e) {
 
             try {
                 throw new MoodCustomException(MoodCustomException.ExceptionType.No_SUCH_METHOD_FOUND, "Enter Valid Method name");
@@ -128,5 +128,21 @@ public class MoodAnalyserTest
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void whenGivenConstructorWithParameter_shouldReturnObject() {
+        Constructor<?> constructor = MoodAnalyzerFactory.getConstructor(String.class);
+        Object object = MoodAnalyzerFactory.getObject(constructor,"i am happy");
+        MoodAnalyser moodAnalyser = (MoodAnalyser)object;
+        Assert.assertEquals(true,moodAnalyser.equals(new MoodAnalyser("i am happy")));
+    }
+
+    @Test
+    public void whenGivenConstructorWithNoParameter_shouldReturnObject() {
+        Constructor<?> constructor = MoodAnalyzerFactory.getConstructor();
+        Object object = MoodAnalyzerFactory.getObject(constructor);
+        MoodAnalyser moodAnalyser = (MoodAnalyser)object;
+        Assert.assertEquals(true,moodAnalyser.equals(new MoodAnalyser()));
     }
 }

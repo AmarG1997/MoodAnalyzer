@@ -24,4 +24,40 @@ public class MoodAnalyzerFactory {
         }
         return null;
     }
+
+
+    public static Constructor <?>  getConstructor(Class<?>... stringClass) {
+        Constructor<?> constructor = null;
+        try {
+            Class<?> aClass = Class.forName("com.bridgelabz.MoodAnalyser");
+            constructor = aClass.getConstructor(stringClass);
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        return constructor;
+    }
+
+
+
+    public static Object getObject(Constructor<?> constructor, String... message) {
+            Object moodObject=null;
+        try {
+             moodObject = constructor.newInstance(message);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return moodObject;
+    }
+
+
+
+
 }
