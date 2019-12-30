@@ -166,5 +166,11 @@ public class MoodAnalyserTest
 
     }
 
-    
+    @Test
+    public void whenGivenMethod_shouldInvokeReturnObject() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        Method method = MoodAnalyzerReflector.getMethod("i am happy");
+        String mood = (String) method.invoke(new MoodAnalyser("i am happy"));
+        Assert.assertEquals("Happy",mood);
+    }
+
 }

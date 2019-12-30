@@ -2,6 +2,7 @@ package com.bridgelabz;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class MoodAnalyzerReflector {
 
@@ -59,5 +60,12 @@ public class MoodAnalyzerReflector {
 
 
 
+
+    public static Method getMethod(String message) throws NoSuchMethodException {
+    Constructor<?> constructor =getConstructor(String.class);
+    Object object = getObject(constructor,message);
+        Method analyze = object.getClass().getDeclaredMethod("analyze");
+        return analyze;
+}
 
 }
